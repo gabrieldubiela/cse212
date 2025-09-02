@@ -17,7 +17,7 @@ public static class Algorithms {
                 count3, time1, time2,
                 time3);
         }
-    }
+    } 
 
     private static double Time(Func<int, int> algorithm, int input, int times) {
         var sw = Stopwatch.StartNew();
