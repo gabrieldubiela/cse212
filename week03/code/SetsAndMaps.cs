@@ -22,6 +22,23 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
+
+        // Create a new set 
+
+        // loop the words
+
+        // Invert the word
+
+        // Compare the word with the inverted word
+
+        // If the word and the inverted word is equal do nothing
+
+        // See if the inverted word is in the set
+
+        // If the inverted word is in the set add the word and the inverted add both to the new set
+
+        // 
+
         return [];
     }
 
