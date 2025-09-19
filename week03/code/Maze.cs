@@ -33,6 +33,13 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+
+        // Check is is exist the position and if is avaliable
+        if (!_mazeMap.ContainsKey(_currX, _currY) && _mazeMap[_currX, _currY] == false)
+        {
+            _currX++;
+            throw new InvalidOperationException("Can't go that way!");
+        } 
     }
 
     /// <summary>
