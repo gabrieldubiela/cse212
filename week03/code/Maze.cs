@@ -34,12 +34,15 @@ public class Maze
     {
         // FILL IN CODE
 
-        // Check is is exist the position and if is avaliable
-        if (!_mazeMap.ContainsKey(_currX, _currY) && _mazeMap[_currX, _currY] == false)
+        // Check is is exist the position and if is avaliable the left position
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][0] == true)
         {
-            _currX++;
+            //  Go left change the X by -1
+            _currX--;
+        }
+        else
+            // Return the phrase "Can't go that way!"
             throw new InvalidOperationException("Can't go that way!");
-        } 
     }
 
     /// <summary>
@@ -47,8 +50,18 @@ public class Maze
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
     /// </summary>
     public void MoveRight()
-    {
+        {
         // FILL IN CODE
+
+        // Check is is exist the position and if is avaliable the right position
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][1] == true)
+        {
+            //  Go right change the X by +1
+            _currX++;
+        }
+        else
+            // Return the phrase "Can't go that way!"
+            throw new InvalidOperationException("Can't go that way!");
     }
 
     /// <summary>
@@ -58,6 +71,16 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+
+        // Check is is exist the position and if is avaliable the up position
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][2] == true)
+        {
+            //  Go up change the Y by -1
+            _currY--;
+        }
+        else
+            // Return the phrase "Can't go that way!"
+            throw new InvalidOperationException("Can't go that way!");
     }
 
     /// <summary>
@@ -67,6 +90,16 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+
+        // Check is is exist the position and if is avaliable the down position
+        if (_mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][3] == true)
+        {
+            //  Go up change the Y by +1
+            _currY++;
+        }
+        else
+            // Return the phrase "Can't go that way!"
+            throw new InvalidOperationException("Can't go that way!"); 
     }
 
     public string GetStatus()
