@@ -44,14 +44,14 @@ public static class SetsAndMaps
                     // Add both the word and the inverted to the new set
                     var pair = $"{word} & {inverted}";
                     var reversePair = $"{inverted} & {word}";
-                        if (!results.Contains(pair) && !results.Contains(reversePair))
+                    if (!results.Contains(pair) && !results.Contains(reversePair))
                         results.Add(pair);
                 }
             }
         }
         // return the new set
         // expected output: new[] { "ma & am", "fi & if" }
-        return results.ToArray(); 
+        return results.ToArray();
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ public static class SetsAndMaps
         }
 
         // If pass everything is an anagram and return true
-            return true;
+        return true;
     }
 
     /// <summary>
@@ -195,6 +195,24 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+        // Create a list to hold the results
+        var results = new List<string>();
+
+        // Use a loop in the features
+        foreach (var feature in featureCollection.features)
+        {
+            // Get the properties of feature
+            var properties = feature.properties;
+
+            // Create a string with place and mag
+            var description = $"{properties.place} - Mag {properties.mag}";
+
+            // Add the string to the list
+            results.Add(description);
+        }
+
+        // Return the list as an array
+        return results.ToArray();
     }
 }
