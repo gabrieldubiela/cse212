@@ -26,6 +26,6 @@
     {
         // Add code here.
         var notDuplicate = data.Intersect(data).ToHashSet();
-        return data.Length - set3.Count;
+        return data.Length - notDuplicate.Count;
     }
 }

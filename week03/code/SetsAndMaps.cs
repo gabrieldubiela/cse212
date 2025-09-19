@@ -23,23 +23,35 @@ public static class SetsAndMaps
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
 
-        // Create a new set 
+        // Convert the array to a set for O(1) lookups
+        var wordSet = new HashSet<string>(words);
+
+        // Create a new set to hold the results
+        var results = new HashSet<string>();
 
         // loop the words
+        foreach (var word in words)
+        {
+            // Invert the word
+            var inverted = $"{word[1]}{word[0]}";
 
-        // Invert the word
-
-        // Compare the word with the inverted word
-
-        // If the word and the inverted word is equal do nothing
-
-        // See if the inverted word is in the set
-
-        // If the inverted word is in the set add the word and the inverted add both to the new set
-
-        // 
-
-        return [];
+            // Compare the word with the inverted word to see if they are different
+            if (word != inverted)
+            {
+                // See if the inverted word is in words
+                if (wordSet.Contains(inverted))
+                {
+                    // Add both the word and the inverted to the new set
+                    var pair = $"{word} & {inverted}";
+                    var reversePair = $"{inverted} & {word}";
+                        if (!results.Contains(pair) && !results.Contains(reversePair))
+                        results.Add(pair);
+                }
+            }
+        }
+        // return the new set
+        // expected output: new[] { "ma & am", "fi & if" }
+        return results.ToArray(); 
     }
 
     /// <summary>
@@ -60,6 +72,20 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+
+            // Find and save the degree that is in the 4th column (index 3)
+            var degree = fields[3];
+
+            // If the degree is already in the dictionary, increment the count
+            if (degrees.ContainsKey(degree))
+            {
+                degrees[degree]++;
+            }
+            else
+            {
+                // Otherwise, add the degree to the dictionary with a count of 1
+                degrees[degree] = 1;
+            }
         }
 
         return degrees;
@@ -84,7 +110,58 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        // Remove spaces and convert to lowercase
+        word1 = word1.Replace(" ", "").ToLower();
+        word2 = word2.Replace(" ", "").ToLower();
+
+        // See if the lengths of the words are different
+        if (word1.Length != word2.Length)
+        {
+            return false;
+        }
+
+        // create a dictionary to hold the letters of word1
+        var letters = new Dictionary<char, int>();
+
+        // use a loop to get the letters in word1
+        foreach (var letter in word1)
+        {
+            // See if the letter is already in the dictionary
+            if (letters.ContainsKey(letter))
+            {
+                // If it is, increment the count
+                letters[letter]++;
+            }
+            else
+            {
+                // If it isn't, add the letter to the dictionary with a count of 1
+                letters[letter] = 1;
+            }
+        }
+
+        // use a loop to get the letters in word2
+        foreach (var letter in word2)
+        {
+            // See if the letter is in the dictionary
+            if (letters.ContainsKey(letter))
+            {
+                // See if the letter have value bigger than 0, 
+                if (letters[letter] > 0)
+                    // Decrement the count
+                    letters[letter]--;
+                else
+                    return false;
+            }
+            else
+            {
+                // If it isn't, return false
+                return false;
+            }
+        }
+
+        // If pass everything is an anagram and return true
+            return true;
     }
 
     /// <summary>
