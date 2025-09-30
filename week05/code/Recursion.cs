@@ -15,7 +15,11 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
-        return 0;
+    
+        if (n == 1)
+            return 1;
+        else
+            return ( n * n ) + SumSquaresRecursive(n - 1);;
     }
 
     /// <summary>
@@ -40,6 +44,19 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
+        if (word.Length == size)
+        {
+            results.Add(word);
+            return;
+        }
+
+        for (int i = 0; i < letters.Length; i++)
+        {
+            char currentLetter = letters[i];
+            string newWord = word + currentLetter;
+            string remainingLetters = letters.Remove(i, 1);
+            PermutationsChoose(results, remainingLetters, size, newWord);
+        }
     }
 
     /// <summary>
@@ -97,9 +114,14 @@ public static class Recursion
             return 4;
 
         // TODO Start Problem 3
+        remember ??= new Dictionary<int, decimal>();
 
+        if (remember.ContainsKey(s))
+            return remember[s];
+        
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        remember[s] = ways;
         return ways;
     }
 
@@ -119,6 +141,32 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        int wildcardIndex = pattern.IndexOf('*');
+
+        // 2. Caso Base: Não há mais curingas
+        // Se IndexOf retorna -1, o padrão é uma string binária completa.
+        if (wildcardIndex == -1)
+        {
+            results.Add(pattern);
+            return;
+        }
+
+        // 3. Passo Recursivo: Processa o primeiro curinga encontrado
+        
+        // Constrói o prefixo da string até o curinga.
+        string prefix = pattern.Substring(0, wildcardIndex);
+        
+        // Constrói o sufixo da string após o curinga.
+        // O +1 garante que começamos após o '*'.
+        string suffix = pattern.Substring(wildcardIndex + 1);
+
+        // Opção 1: Substitui o '*' por '0'
+        string patternWithZero = prefix + "0" + suffix;
+        WildcardBinary(patternWithZero, results); // Chamada recursiva para a próxima '*'
+
+        // Opção 2: Substitui o '*' por '1'
+        string patternWithOne = prefix + "1" + suffix;
+        WildcardBinary(patternWithOne, results); // Chamada recursiva para a próxima '*'
     }
 
     /// <summary>
@@ -136,8 +184,29 @@ public static class Recursion
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
-        // ADD CODE HERE
+        // Adiciona a posição atual ao caminho
+        currPath.Add((x, y));
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+    if (maze.IsEnd(x, y))
+    {
+        // Aqui sim usamos a linha que o comentário pedia:
+        results.Add(currPath.AsString());
     }
+    else
+    {
+        if (maze.IsValidMove(currPath, x + 1, y))
+            SolveMaze(results, maze, x + 1, y, currPath);
+
+        if (maze.IsValidMove(currPath, x - 1, y))
+            SolveMaze(results, maze, x - 1, y, currPath);
+
+        if (maze.IsValidMove(currPath, x, y + 1))
+            SolveMaze(results, maze, x, y + 1, currPath);
+
+        if (maze.IsValidMove(currPath, x, y - 1))
+            SolveMaze(results, maze, x, y - 1, currPath);
+    }
+
+    currPath.RemoveAt(currPath.Count - 1);
+}
 }
