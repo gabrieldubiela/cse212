@@ -174,12 +174,10 @@ public static class Recursion
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
-        // Adiciona a posição atual ao caminho
         currPath.Add((x, y));
 
     if (maze.IsEnd(x, y))
     {
-        // Aqui sim usamos a linha que o comentário pedia:
         results.Add(currPath.AsString());
     }
     else
