@@ -143,30 +143,20 @@ public static class Recursion
         // TODO Start Problem 4
         int wildcardIndex = pattern.IndexOf('*');
 
-        // 2. Caso Base: Não há mais curingas
-        // Se IndexOf retorna -1, o padrão é uma string binária completa.
         if (wildcardIndex == -1)
         {
             results.Add(pattern);
             return;
         }
 
-        // 3. Passo Recursivo: Processa o primeiro curinga encontrado
-        
-        // Constrói o prefixo da string até o curinga.
         string prefix = pattern.Substring(0, wildcardIndex);
-        
-        // Constrói o sufixo da string após o curinga.
-        // O +1 garante que começamos após o '*'.
         string suffix = pattern.Substring(wildcardIndex + 1);
 
-        // Opção 1: Substitui o '*' por '0'
         string patternWithZero = prefix + "0" + suffix;
-        WildcardBinary(patternWithZero, results); // Chamada recursiva para a próxima '*'
+        WildcardBinary(patternWithZero, results); 
 
-        // Opção 2: Substitui o '*' por '1'
         string patternWithOne = prefix + "1" + suffix;
-        WildcardBinary(patternWithOne, results); // Chamada recursiva para a próxima '*'
+        WildcardBinary(patternWithOne, results); 
     }
 
     /// <summary>
