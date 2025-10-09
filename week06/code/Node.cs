@@ -58,7 +58,6 @@ public class Node
         rightHeight = Right.GetHeight();
     }
     
-    // Add 1 for the current node.
     return 1 + Math.Max(leftHeight, rightHeight);
         
     }
