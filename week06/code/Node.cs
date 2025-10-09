@@ -13,9 +13,6 @@ public class Node
     {
         // TODO Start Problem 1
 
-        if (value == Data)
-        return; // Ignore duplicates
-
         if (value < Data)
         {
             if (Left is null)
@@ -23,7 +20,8 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else
+
+        else if (value > Data)
         {
             if (Right is null)
                 Right = new Node(value);
